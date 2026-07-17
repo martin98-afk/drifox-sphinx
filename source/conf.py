@@ -8,7 +8,7 @@
 project = 'DriFox'
 copyright = '2025~2026, Martin98-afk'
 author = 'Martin98-afk'
-release = '0.3.9'
+release = '0.4.1'
 
 # -*- coding: utf-8 -*-
 

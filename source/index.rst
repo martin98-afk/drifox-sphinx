@@ -1,7 +1,7 @@
 DriFox |version_str|
 ####################
 
-DriFox（飘狐）v0.3.9 是一款基于 Python + PyQt5 开发的**轻量化 AI 桌面对话助手**。不做大而全的 IDE，只是一个对话框——随时调出，随意提问，随性分支。
+DriFox（飘狐）v0.4.1 是一款基于 Python + PyQt5 开发的**轻量化 AI 桌面对话助手**。不做大而全的 IDE，只是一个对话框——随时调出，随意提问，随性分支。
 
 .. image:: _images/drifoxlogo.png
    :alt: DriFox Logo

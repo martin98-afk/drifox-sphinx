@@ -8,11 +8,11 @@
 
 DriFox 采用 **Primary / Subagent / Hidden** 三层 Agent 设计，通过 Markdown + YAML frontmatter 定义。
 
-Agent 类型
-==========
+Agent 类型（共 11 个 Agent）
+========================================
 
-Primary Agent
--------------
+Primary Agent（3个）
+----------------------------
 
 拥有全部工具权限的主智能体：
 
@@ -20,8 +20,8 @@ Primary Agent
 - ``build`` — 代码构建（全工具权限）
 - ``code-reviewer`` — 代码审查
 
-Subagent
---------
+Subagent（4个）
+----------------
 
 可并行执行的子智能体，独立 LLM 循环 + 工具环境：
 
@@ -35,28 +35,10 @@ Subagent
      - 代码库探索分析
    * - leader
      - 团队统筹管理（任务拆解/分发/监控/汇总）
-   * - architecture-critic
-     - 架构评审与反向验证
-   * - security-auditor
-     - 安全审计（OWASP Top 10）
-   * - test-engineer
-     - 测试用例编写
-   * - legacy-analyst
-     - 遗留代码分析
-   * - business-rules-extractor
-     - 业务规则提取
-   * - code-simplifier
-     - 代码简化重构
-   * - deep-research
-     - 深度研究分析
-   * - backend-architect
-     - 后端架构设计
-   * - frontend-architect
-     - 前端架构设计
-   * - root-cause-analyst
-     - 根因分析
-   * - 更多…
-     - 由插件系统扩展
+   * - task-executor
+     - 任务执行与工具调用
+   * - review
+     - 代码审查与反馈
 
 Hidden Agent
 ------------

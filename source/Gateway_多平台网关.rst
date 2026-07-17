@@ -54,9 +54,9 @@ Gateway 是一个**协议适配层**，它将不同 IM 平台的消息统一为 
    * - 飞书 (Feishu)
      - Webhook + Token
      - 消息收发、富文本
-   * - Slack
-     - Bot Token + Signing Secret
-     - 消息收发、消息块、命令
+   * - WeCom（企业微信）
+     - Webhook / 企业微信机器人
+     - 消息收发、文件、命令
 
 安装与配置
 ==========
@@ -95,7 +95,7 @@ Gateway 属于可选组件组，需单独安装：
     DingTalk ──┤
     Discord  ──┼──→ [Gateway 适配层] ──→ [内部消息队列] ──→ [ChatEngine] ──→ [LLM]
     Feishu   ──┤                                         │
-    Slack    ──┘                                         ├── [ToolExecutor]
+    WeCom   ──┘                                         ├── [ToolExecutor]
                                                          ├── [SubAgentManager]
                                                          └── [PluginManager]
 

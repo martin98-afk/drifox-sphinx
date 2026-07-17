@@ -1,7 +1,7 @@
 整体介绍
 ########
 
-DriFox（飘狐）v0.3.9 — 基于 Python + PyQt5 开发的轻量化 AI 桌面对话助手。
+DriFox（飘狐）v0.4.1 — 基于 Python + PyQt5 开发的轻量化 AI 桌面对话助手。
 
 .. image:: /_images/软件介绍.png
    :alt: DriFox 软件概览
@@ -45,19 +45,19 @@ DriFox（飘狐）v0.3.9 — 基于 Python + PyQt5 开发的轻量化 AI 桌面�
    * - 🎨 动态主题系统
      - 21 套主题，浅色/深色，组件级感知
    * - 🤖 多智能体并行
-     - 20+ 子智能体，DAG 工作流编排
+     - 11 子智能体，DAG 工作流编排
    * - 🧩 插件系统
-     - 33+ 插件，命令/Agent/Skill/主题/Hook/MCP
+     - 6 插件（含 50+ 子组件），命令/Agent/Skill/主题/Hook/MCP
    * - 🛠️ 40+ 内置工具
      - 文件/执行/网络/代码/桌面/团队/MCP
    * - 🔌 多模型
-     - OpenAI / Claude / DeepSeek / MiniMax / 通义
+     - OpenAI / Claude / DeepSeek / MiniMax / 通义 / 智谱AI / Google Gemini / Groq / SiliconFlow / 百度千帆 / 火山方舟 / Ollama / OpenCode
    * - 🌐 MCP 系统
      - Model Context Protocol，扩展工具能力
    * - 🔌 Hook 系统
-     - 6 种事件钩子，可控制流程
+     - 7 种事件钩子，可控制流程
    * - 🧩 Skill 系统
-     - 25+ 即用技能，可自行扩展
+     - 25 即用技能，可自行扩展
    * - 🖼️ 图片富媒体
      - Markdown/HTML 图片原生渲染
    * - 🐾 桌宠系统

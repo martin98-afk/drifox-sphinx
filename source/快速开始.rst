@@ -22,7 +22,7 @@
     uv sync
 
     # 可选组件组
-    uv sync --group gateway     # 通讯平台（钉钉/Telegram/Discord/飞书/Slack）
+    uv sync --group gateway     # 通讯平台（钉钉/Telegram/Discord/飞书/企业微信）
     uv sync --group dev         # 开发工具（pytest/ruff/mypy）
     uv sync --group build       # 跨平台打包（pyinstaller）
     uv sync --group mac-build   # macOS 专用打包（dmgbuild + Pillow）

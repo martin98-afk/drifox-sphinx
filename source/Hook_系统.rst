@@ -18,18 +18,20 @@ DriFox 支持通过可视化界面配置和管理 Hook 事件钩子。
 
    * - 事件
      - 触发时机
+   * - BuildSystemPrompt
+     - 构建系统提示词时
    * - SessionStart
      - 新会话启动时
    * - PreUserMessage
      - 用户消息发送前
    * - PostUserMessage
      - 用户消息发送后
-   * - PreAssistantMessage
-     - AI 助手回复前
    * - PreToolUse
      - 工具执行前（可 BLOCK）
    * - PostToolUse
      - 工具执行后
+   * - Stop
+     - 会话/任务停止时
 
 Hook 类型
 =========
