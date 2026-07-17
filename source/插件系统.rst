@@ -1,0 +1,115 @@
+插件系统
+########
+
+DriFox 的插件系统是其能力扩展的核心基石，将**命令、智能体、技能、主题、Hooks、MCP 配置、UI 组件**等所有扩展能力统一纳入插件化治理。
+
+架构总览
+========
+
+::
+
+    项目根目录/
+    ├── plugins/
+    │   └── system/              # 系统内置插件（打包在 exe 中）
+    │       ├── .drifox-plugin/  # 插件清单
+    │       ├── commands/        # 25+ 系统命令
+    │       ├── agents/          # 系统智能体
+    │       ├── skills/          # 25+ 系统技能
+    │       ├── themes/          # 21 套主题
+    │       ├── hooks/           # 系统 Hooks
+    │       └── .mcp.json        # 默认 MCP 配置
+    │
+    ├── .drifox/
+    │   └── plugins/             # 用户安装的第三方插件
+
+核心机制
+========
+
+.. list-table::
+   :header-rows: 1
+   :widths: 15 60
+
+   * - 机制
+     - 说明
+   * - 🧩 统一插件化
+     - 命令、Agent、Skill、主题、Hook、MCP、UI 全部以插件形式管理
+   * - 📦 双源发现
+     - 扫描 plugins/system（系统）和 .drifox/plugins（用户）
+   * - 🔖 清单驱动
+     - 每个插件含 .drifox-plugin/plugin.json 声明组件
+   * - 🔄 热插拔
+     - 启用/禁用无需重启，rescan() 即时生效，增量重载
+   * - 🏷️ 命名空间隔离
+     - 用户插件添加命名空间前缀，避免冲突
+   * - 🧬 兼容 Claude
+     - 兼容 .claude-plugin/plugin.json 格式
+   * - ⚙️ MCP 配置合并
+     - 多插件 .mcp.json 自动合并去重
+
+插件组件类型
+============
+
+.. list-table::
+   :header-rows: 1
+   :widths: 15 30 30
+
+   * - 组件
+     - 说明
+     - 示例
+   * - commands/
+     - 自定义命令，/xxx 形式触发
+     - /team, /theme, /wordcloud
+   * - agents/
+     - 新增子智能体角色
+     - leader, architecture-critic
+   * - skills/
+     - 安装技能模块
+     - @brainstorming, @ui-plugin-creator
+   * - themes/
+     - 主题样式文件
+     - 21 套主题（含浅色/深色）
+   * - hooks/
+     - 事件钩子脚本
+     - project_intel, safety_guard
+   * - .mcp.json
+     - MCP 服务器配置
+     - GitHub, Playwright
+   * - ui/
+     - UI 组件（浮动卡片/渲染器/工厂）
+     - 上下文用量统计, 文件树
+
+系统命令（v0.3.x 新增）
+=======================
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 50
+
+   * - 命令
+     - 说明
+   * - /team
+     - 团队模板管理（v0.3.3）
+   * - /theme
+     - 主题切换（v0.3.1）
+   * - /title-gen
+     - 标题生成模型切换（v0.3.1）
+   * - /toggle-window
+     - 隐藏/显示窗口（v0.3.9）
+   * - /clear
+     - 清空会话（v0.3.9）
+   * - /subagents
+     - 子智能体状态卡片（v0.2.x）
+   * - /webresearch
+     - 网络研究
+   * - /remember
+     - 记忆操作
+   * - /todos
+     - 待办管理
+   * - /lsp-install
+     - 安装语言服务器
+   * - /verify
+     - 验证功能
+   * - /release
+     - 发布
+   * - /receive-review
+     - 接收审查

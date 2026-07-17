@@ -1,0 +1,45 @@
+工具系统
+########
+
+DriFox 提供 40+ 内置工具，覆盖文件操作、命令执行、网络访问、代码分析、桌面自动化、团队协作等场景。
+
+工具列表
+========
+
+.. list-table::
+   :header-rows: 1
+   :widths: 15 60
+
+   * - 类别
+     - 工具
+   * - 文件
+     - read, write, edit, multi_edit, patch, grep, glob, list, diff, upload_file
+   * - 执行
+     - bash, bg_start, bg_stop, bg_logs, bg_list
+   * - 网络
+     - webfetch, websearch
+   * - 代码
+     - get_diagnostics, lsp, codegraph_explore
+   * - 桌面自动化
+     - screenshot, mouse, keyboard
+   * - 记忆
+     - memory_save, memory_search, memory_list
+   * - 任务
+     - todowrite, todoread, skill, list_skills
+   * - 子智能体
+     - subagent_para（并行分发）, subagent_dag（DAG 工作流）, subagent_status（状态查询）
+   * - 团队
+     - team_list_members（列出成员）, team_send_message（发送任务邮件）
+   * - MCP
+     - ``mcp__server__tool`` — 连接 MCP Server 后自动出现
+   * - 项目
+     - scan_repo, stage_files
+   * - 交互
+     - question
+
+新增工具（v0.3.x）
+==================
+
+- ``codegraph_explore`` — 语义化代码探索（v0.3.4）
+- ``team_list_members`` / ``team_send_message`` — 团队协作（v0.3.3）
+- ``screenshot`` / ``mouse`` / ``keyboard`` — 桌面自动化（v0.2.x 后期）

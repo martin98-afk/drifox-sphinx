@@ -1,0 +1,104 @@
+架构说明
+########
+
+DriFox v0.3.9 采用四层架构设计，从上到下依次为 UI 层、渲染层、引擎层和存储层。
+
+::
+
+    ┌─────────────────────────────────────────────────────────────────┐
+    │                    DriFox v0.3.9 架构                          │
+    ├─────────────────────────────────────────────────────────────────┤
+    │  UI 层                                                          │
+    │  ├── ToolPopupDialog – 浮动窗口容器（穿透/透明）                │
+    │  ├── OpenAIChatToolWindow – 主聊天窗口                          │
+    │  ├── MessageCard – 消息卡片渲染                                  │
+    │  ├── DiffViewer – 代码差异对比视图（单栏/双栏）                  │
+    │  ├── SubAgentSessionDialog – 子智能体会话对话框                  │
+    │  ├── Floating Cards – UI 插件浮动卡片                           │
+    │  ├── PixelPetWidget – 桌面宠物                                  │
+    │  ├── TrayManager – 系统托盘                                     │
+    │  ├── CardContainer – 卡片容器（命令卡片/设置卡片等）             │
+    │  ├── ContextUsageRing – 上下文用量环形图                        │
+    │  └── BottomInputArea – 底部输入区                              │
+    ├─────────────────────────────────────────────────────────────────┤
+    │  渲染层                                                         │
+    │  ├── render_helpers – 工具块 HTML 渲染                          │
+    │  ├── message_content – 消息内容格式化                           │
+    │  ├── diff_viewer – Git 风格差异 HTML 生成器（单栏/双栏）        │
+    │  ├── _resolve_image_src – 图片路径自动解析                      │
+    │  └── ECharts 5 (CDN) – 交互式图表                              │
+    ├─────────────────────────────────────────────────────────────────┤
+    │  引擎层                                                         │
+    │  ├── ChatEngine – 对话上下文组装与 LLM 调用                     │
+    │  ├── ContextBuilder – 消息规范化与系统提示注入                 │
+    │  ├── ToolExecutor – 工具执行（共享线程池）                      │
+    │  ├── AgentManager – Agent 定义加载与切换                       │
+    │  ├── PluginManager（单例）– 插件发现/热插拔/资源查询           │
+    │  ├── UIPluginRegistry（单例）– UI 插件注册表                    │
+    │  ├── HistoryCompactor – 上下文压缩                              │
+    │  ├── SubAgentManager – 子智能体 DAG 编排与执行引擎              │
+    │  ├── HookManager – Hook 生命周期管理与事件触发                  │
+    │  ├── TeamManager – 团队协作管理                                │
+    │  ├── CodeGraph – 代码智能引擎                                  │
+    │  ├── Gateway – 多平台消息网关                                   │
+    │  ├── UIEngine – UI 引擎（主题/样式/挂件管理）                  │
+    │  ├── CronEngine – 定时任务引擎                                 │
+    │  └── AutoLoopEngine – 自动循环执行引擎                         │
+    ├─────────────────────────────────────────────────────────────────┤
+    │  存储层                                                         │
+    │  ├── SessionManager – 会话管理                                  │
+    │  ├── MemoryManager – 长期记忆（SQLite）                        │
+    │  ├── HistoryManager – 归档与检索                               │
+    │  ├── SubAgentLogRepository – 子智能体日志持久化                │
+    │  └── SessionStore – SQLite 持久化                              │
+    └─────────────────────────────────────────────────────────────────┘
+
+UI 层
+=====
+
+负责用户交互界面，包括主聊天窗口、消息卡片、浮动窗口、设置面板、桌面宠物、系统托盘等组件。
+基于 PyQt5 + PyQt-Fluent-Widgets 构建，支持穿透模式、透明度调节、多窗口管理、动态主题切换等特性。
+
+**v0.3.x 新增 UI 组件：**
+
+- SubAgentSessionDialog — 子智能体会话对话框，实时展示任务日志
+- Floating Cards — UI 插件浮动卡片（4 个内置插件）
+- PixelPetWidget — 桌面像素宠物
+- TrayManager — 系统托盘常驻
+- CardContainer — 卡片容器（命令/设置/挂件统一管理）
+- Floating Tooltip — 命令卡片浮动 tooltip 独立窗口
+
+渲染层
+============
+
+负责将 AI 回复内容渲染为可视化界面。支持 Markdown→HTML 转换、代码语法高亮、
+ECharts 交互式图表渲染、图片路径自动解析、Diff 差异对比（单栏/双栏/单词级高亮）等能力。
+
+引擎层
+============
+
+核心业务逻辑层：
+
+- **ChatEngine** — 组装对话上下文，调用 LLM API
+- **ToolExecutor** — 执行 40+ 内置工具（共享线程池优化）
+- **PluginManager** — 插件发现、热插拔、配置合并（单例）
+- **UIPluginRegistry** — UI 组件注册表（单例，v0.3.0 新增）
+- **SubAgentManager** — 子智能体 DAG 编排与并行执行
+- **TeamManager** — 团队协作管理（v0.3.3 新增）
+- **CodeGraph** — 代码智能引擎（v0.3.4 新增）
+- **HookManager** — 事件钩子生命周期管理
+- **Gateway** — 多平台消息网关（钉钉/Telegram/Discord/飞书/Slack）
+- **UIEngine** — 主题管理、样式刷新、跨组件通信
+- **CronEngine** — 定时任务调度（v0.3.x 新增）
+- **AutoLoopEngine** — 自动循环执行引擎
+
+存储层
+============
+
+基于 SQLite 的持久化存储：
+
+- **SessionManager** — 会话历史管理
+- **MemoryManager** — 长期记忆存储与检索
+- **HistoryManager** — 归档与检索
+- **SubAgentLogRepository** — 子智能体日志持久化
+- **TeamTemplateManager** — 团队模板持久化（v0.3.3 新增）

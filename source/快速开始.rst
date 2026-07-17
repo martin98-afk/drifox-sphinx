@@ -1,0 +1,51 @@
+快速开始
+########
+
+环境要求
+========
+
+- Python 3.14+
+- PyQt5 >= 5.15.0
+
+安装（推荐 uv）
+===============
+
+.. code-block:: bash
+
+    git clone https://github.com/martin98-afk/DriFox.git
+    cd DriFox
+
+    # 安装 uv（如未安装）
+    pip install uv
+
+    # 创建虚拟环境并安装核心依赖
+    uv sync
+
+    # 可选组件组
+    uv sync --group gateway     # 通讯平台（钉钉/Telegram/Discord/飞书/Slack）
+    uv sync --group dev         # 开发工具（pytest/ruff/mypy）
+    uv sync --group build       # 跨平台打包（pyinstaller）
+    uv sync --group mac-build   # macOS 专用打包（dmgbuild + Pillow）
+    uv sync --all-groups        # 全部安装
+
+运行
+====
+
+.. code-block:: bash
+
+    python main.py
+
+打包（PyInstaller）
+===========================
+
+.. code-block:: bash
+
+    uv sync --group build
+    python build.py
+
+macOS 专用 DMG 打包：
+
+.. code-block:: bash
+
+    uv sync --group build --group mac-build
+    python create_dmg.py

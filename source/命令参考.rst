@@ -1,0 +1,73 @@
+命令参考
+########
+
+DriFox 支持 ``/command`` 格式的系统命令和插件命令。
+
+系统内置命令
+============
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 50
+
+   * - 命令
+     - 功能
+   * - /explore
+     - 代码库探索
+   * - /plan
+     - 任务规划
+   * - /dag
+     - DAG 工作流
+   * - /wordcloud [焦点]
+     - 生成词云会话总结
+   * - /compact [焦点]
+     - 手动触发上下文压缩
+   * - /subagents
+     - 子智能体运行状态卡片
+   * - /team
+     - 团队模板管理（save/load/list/delete）
+   * - /theme
+     - 切换主题
+   * - /title-gen
+     - 切换标题生成默认模型
+   * - /toggle-window
+     - 隐藏/显示主窗口
+   * - /clear
+     - 清空当前会话
+   * - /webresearch
+     - 网络研究
+   * - /remember
+     - 记忆相关操作
+   * - /todos
+     - 待办清单管理
+   * - /lsp-install
+     - 安装语言服务器
+   * - /worktree
+     - Git Worktree 管理
+   * - /branch
+     - 分支管理
+   * - /finish-branch
+     - 完成当前分支
+   * - /new
+     - 新建会话
+   * - /new-window
+     - 新建窗口
+   * - /debug
+     - 调试命令
+   * - /plugin
+     - 插件管理
+   * - /project-note
+     - 项目笔记管理
+   * - /quota-setting
+     - 套餐用量设置
+   * - /verify
+     - 验证功能
+   * - /release
+     - 发布相关
+   * - /receive-review
+     - 接收代码审查
+
+插件命令
+========
+
+由已安装的第三方插件提供，命名空间格式：``/plugin-name:command``

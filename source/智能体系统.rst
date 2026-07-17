@@ -1,0 +1,94 @@
+智能体系统
+##################
+
+.. image:: /_images/多子智能体任务执行.png
+   :alt: 子智能体任务执行界面
+   :align: center
+   :width: 90%
+
+DriFox 采用 **Primary / Subagent / Hidden** 三层 Agent 设计，通过 Markdown + YAML frontmatter 定义。
+
+Agent 类型
+==========
+
+Primary Agent
+-------------
+
+拥有全部工具权限的主智能体：
+
+- ``plan`` — 任务规划与分解（只读模式）
+- ``build`` — 代码构建（全工具权限）
+- ``code-reviewer`` — 代码审查
+
+Subagent
+--------
+
+可并行执行的子智能体，独立 LLM 循环 + 工具环境：
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 50
+
+   * - Agent
+     - 说明
+   * - explore
+     - 代码库探索分析
+   * - leader
+     - 团队统筹管理（任务拆解/分发/监控/汇总）
+   * - architecture-critic
+     - 架构评审与反向验证
+   * - security-auditor
+     - 安全审计（OWASP Top 10）
+   * - test-engineer
+     - 测试用例编写
+   * - legacy-analyst
+     - 遗留代码分析
+   * - business-rules-extractor
+     - 业务规则提取
+   * - code-simplifier
+     - 代码简化重构
+   * - deep-research
+     - 深度研究分析
+   * - backend-architect
+     - 后端架构设计
+   * - frontend-architect
+     - 前端架构设计
+   * - root-cause-analyst
+     - 根因分析
+   * - 更多…
+     - 由插件系统扩展
+
+Hidden Agent
+------------
+
+后台自动运行，无需用户感知：
+
+- ``summary`` — 信息总结
+- ``compaction`` — 上下文压缩
+- ``title`` — 会话标题生成
+- ``auto_loop`` — 自动循环模式
+
+Agent 定义示例
+==============
+
+.. code-block:: yaml
+
+    ---
+    name: build
+    mode: all
+    temperature: 0.3
+    permission:
+      "*": allow
+    ---
+
+    # Role
+    你是一个专业的 coding builder...
+
+团队协作
+========
+
+v0.3.3 新增 **Leader 智能体**，负责统筹团队协作：
+
+- ``team_list_members`` — 列出团队中所有成员
+- ``team_send_message`` — 向指定 Agent 发送任务邮件（串行处理，自动回复）
+- ``/team`` 命令 — 团队模板的保存/加载/列表/删除

@@ -1,0 +1,30 @@
+/* DriFox Sphinx Documentation Custom Styles */
+
+/* Logo styling */
+.sidebar-logo {
+    max-width: 80%;
+}
+
+/* Table styling */
+table.docutils {
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+table.docutils thead th {
+    background-color: var(--color-accent-emphasis);
+    color: white;
+    font-weight: 600;
+}
+
+/* Code block styling */
+div.highlight {
+    border-radius: 4px;
+}
+
+/* Image alignment */
+img.align-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

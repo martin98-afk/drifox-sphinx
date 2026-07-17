@@ -1,0 +1,96 @@
+整体介绍
+########
+
+DriFox（飘狐）v0.3.9 — 基于 Python + PyQt5 开发的轻量化 AI 桌面对话助手。
+
+.. image:: /_images/软件介绍.png
+   :alt: DriFox 软件概览
+   :align: center
+   :width: 90%
+
+设计理念
+========
+
+**不做大而全的 IDE。** DriFox 只是一个对话框——随时调出，随意提问，随性分支。
+
+核心特性
+========
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 60
+
+   * - 特性
+     - 说明
+   * - 🎯 极简悬浮界面
+     - 置顶对话框，随开随用，支持穿透/透明度/锁定
+   * - 🔀 分支会话
+     - 问题分叉，多窗口并行探索
+   * - 🌲 Git Worktree
+     - 从 UI 直接管理 worktree，AI 感知分支
+   * - 🧠 长记忆系统
+     - SQLite 持久化，置信度评分，自动学习
+   * - 📊 上下文压缩
+     - 智能 Token 预算控制，长对话自动摘要
+   * - 📈 交互式图表
+     - echarts 代码块渲染 ECharts 图表
+   * - ☁️ 词云总结
+     - `/wordcloud` 一键生成 ECharts 词云
+   * - 🧩 UI 插件系统
+     - 浮动卡片 / 内容渲染器 / 消息工厂，热插拔
+   * - 🤖 团队协作
+     - Leader 智能体，任务邮件，模板管理
+   * - 🧠 CodeGraph 引擎
+     - 语义化代码探索（5种模式）
+   * - 🎨 动态主题系统
+     - 21 套主题，浅色/深色，组件级感知
+   * - 🤖 多智能体并行
+     - 20+ 子智能体，DAG 工作流编排
+   * - 🧩 插件系统
+     - 33+ 插件，命令/Agent/Skill/主题/Hook/MCP
+   * - 🛠️ 40+ 内置工具
+     - 文件/执行/网络/代码/桌面/团队/MCP
+   * - 🔌 多模型
+     - OpenAI / Claude / DeepSeek / MiniMax / 通义
+   * - 🌐 MCP 系统
+     - Model Context Protocol，扩展工具能力
+   * - 🔌 Hook 系统
+     - 6 种事件钩子，可控制流程
+   * - 🧩 Skill 系统
+     - 25+ 即用技能，可自行扩展
+   * - 🖼️ 图片富媒体
+     - Markdown/HTML 图片原生渲染
+   * - 🐾 桌宠系统
+     - PixelPet 桌面宠物
+   * - 🚀 自动更新
+     - 自动检查新版本
+
+技术栈
+======
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 50
+
+   * - 技术
+     - 用途
+   * - PyQt5 + PyQt-Fluent-Widgets
+     - GUI 框架
+   * - PyQtWebEngine
+     - HTML/Markdown/ECharts/图片渲染
+   * - ECharts 5
+     - 交互式图表
+   * - SQLite
+     - 持久化存储
+   * - OpenAI Python Client
+     - LLM API 调用
+   * - loguru
+     - 日志
+   * - mcp
+     - Model Context Protocol
+   * - uv
+     - 包管理/构建
+   * - codegraph-py
+     - 代码智能引擎
+   * - fastapi + uvicorn
+     - 本地 HTTP 服务

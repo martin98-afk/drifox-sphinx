@@ -1,0 +1,35 @@
+图片与富媒体显示
+#########################
+
+DriFox 的消息卡片支持丰富的图片与富媒体渲染能力。
+
+.. image:: /_images/高级md样式显示.png
+   :alt: 富媒体显示效果
+   :align: center
+   :width: 90%
+
+功能概览
+========
+
+- 📷 **Markdown 图片** — 支持 `![alt](path)` 语法，本地图片自动解析为绝对路径
+- 🖼️ **HTML 图片** — `<img>` 标签原生渲染，支持相对/绝对路径、HTTP/HTTPS/Data URI
+- 🔗 **路径自动解析** — 相对路径自动转为 `file:///` 绝对路径
+- 🌐 **远程图片** — 支持 HTTP/HTTPS 网络图片直链加载
+- 🎨 **背景自定义** — 支持从主题配置加载背景图片（PNG/JPG/WebP）
+- 🧩 **多模态支持** — 上下文压缩智能处理历史图片
+- 📎 **Gateway 图片发送** — 消息网关模式下自动提取图片并发送
+
+支持格式
+========
+
+- PNG, JPG/JPEG, GIF, WebP, BMP
+
+工作机制
+========
+
+::
+
+    AI 回复包含 ![图](images/chart.png)
+        → backend._extract_markdown_images() 提取图片路径
+        → _resolve_image_src() 将相对路径转为 file:/// 绝对路径
+        → QWebEngineView 加载渲染
