@@ -1,30 +1,306 @@
-/* DriFox Sphinx Documentation Custom Styles */
+/* ============================================================
+   DriFox Docs — Design System v2
+   狐橙渐变 × 主题 HSL 变量 · 兼容 html.dark 暗色切换
+   ============================================================ */
 
-/* Logo styling */
-.sidebar-logo {
-    max-width: 80%;
+:root {
+  --fx-orange: #ff6b35;
+  --fx-amber: #ff9f43;
+  --fx-rose: #ff4d6d;
+  --fx-grad: linear-gradient(120deg, var(--fx-orange), var(--fx-amber) 45%, var(--fx-rose));
+  --fx-radius: 14px;
+  --fx-ease: cubic-bezier(.22, 1, .36, 1);
 }
 
-/* Table styling */
+/* ---------- 顶部阅读进度条 ---------- */
+#fx-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: var(--fx-grad);
+  z-index: 9999;
+  border-radius: 0 3px 3px 0;
+  box-shadow: 0 0 8px rgba(255, 107, 53, .55);
+  transition: width .1s linear;
+}
+
+/* ---------- Hero ---------- */
+.drifox-hero {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 3rem;
+  padding: 3.2rem 2.2rem 2.6rem;
+  border-radius: 22px;
+  background:
+    radial-gradient(600px 240px at 12% -10%, rgba(255, 107, 53, .14), transparent 60%),
+    radial-gradient(500px 220px at 95% 0%, rgba(56, 189, 248, .10), transparent 60%),
+    radial-gradient(420px 200px at 60% 120%, rgba(255, 79, 109, .09), transparent 60%),
+    hsl(var(--muted, 210 40% 96.1%));
+  border: 1px solid rgba(255, 107, 53, .22);
+  isolation: isolate;
+  animation: fx-breathe 9s ease-in-out infinite alternate;
+}
+@keyframes fx-breathe {
+  from { box-shadow: 0 0 0 rgba(255, 107, 53, 0); }
+  to   { box-shadow: 0 0 42px rgba(255, 107, 53, .16); }
+}
+
+.drifox-hero .fx-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(42px);
+  opacity: .45;
+  pointer-events: none;
+  animation: fx-drift 14s var(--fx-ease) infinite alternate;
+}
+.drifox-hero .fx-orb.o1 { width: 240px; height: 240px; left: -60px; bottom: -80px; background: rgba(255, 107, 53, .4); }
+.drifox-hero .fx-orb.o2 { width: 200px; height: 200px; right: -40px; top: -60px; background: rgba(56, 189, 248, .3); animation-delay: -6s; }
+.drifox-hero .fx-orb.o3 { width: 140px; height: 140px; right: 24%; bottom: -50px; background: rgba(255, 79, 109, .26); animation-delay: -3s; }
+@keyframes fx-drift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(34px, -26px) scale(1.15); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .drifox-hero, .drifox-hero .fx-orb { animation: none; }
+}
+
+.hero-badges { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.1rem; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .35em;
+  padding: .22em .85em;
+  border-radius: 999px;
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  border: 1px solid rgba(255, 107, 53, .4);
+  color: var(--fx-orange);
+  background: rgba(255, 107, 53, .08);
+}
+.hero-badge.badge-version {
+  background: var(--fx-grad);
+  border: none;
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(255, 107, 53, .4);
+}
+.hero-badge.badge-dim {
+  border-color: hsl(var(--border, 214.3 31.8% 91.4%));
+  color: hsl(var(--muted-foreground, 215.4 16.3% 46.9%));
+  background: hsl(var(--background, 0 0% 100%));
+}
+
+.hero-title {
+  font-size: clamp(2.2rem, 5vw, 3.4rem) !important;
+  line-height: 1.12 !important;
+  margin: 0 0 .5rem !important;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  color: hsl(var(--foreground, 222.2 47.4% 11.2%));
+}
+.hero-title .fx-grad-text {
+  background: var(--fx-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero-sub {
+  font-size: 1.06rem;
+  max-width: 40em;
+  margin: 0 0 1.4rem !important;
+  color: hsl(var(--foreground, 222.2 47.4% 11.2%));
+  opacity: .88;
+  line-height: 1.75;
+}
+.hero-cta { display: flex; flex-wrap: wrap; gap: .7rem; margin-bottom: .4rem; }
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .45em;
+  padding: .55em 1.3em;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .95rem;
+  text-decoration: none !important;
+  transition: transform .25s var(--fx-ease), box-shadow .25s var(--fx-ease), border-color .25s var(--fx-ease);
+}
+.hero-btn.primary {
+  background: var(--fx-grad);
+  color: #fff !important;
+  box-shadow: 0 4px 18px rgba(255, 107, 53, .42);
+}
+.hero-btn.ghost {
+  border: 1.5px solid hsl(var(--border, 214.3 31.8% 91.4%));
+  color: hsl(var(--foreground, 222.2 47.4% 11.2%)) !important;
+  background: hsl(var(--background, 0 0% 100%));
+}
+.hero-btn:hover { transform: translateY(-2px); }
+.hero-btn.primary:hover { box-shadow: 0 8px 26px rgba(255, 107, 53, .55); }
+.hero-btn.ghost:hover {
+  border-color: var(--fx-orange);
+  color: var(--fx-orange) !important;
+}
+
+/* ---------- 特性卡片网格 ---------- */
+.fx-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 1.6rem 0 0;
+}
+.fx-card {
+  position: relative;
+  padding: 1.15rem 1.2rem;
+  border-radius: var(--fx-radius);
+  border: 1px solid hsl(var(--border, 214.3 31.8% 91.4%));
+  background: hsl(var(--card, 0 0% 100%));
+  overflow: hidden;
+  transition: transform .3s var(--fx-ease), box-shadow .3s var(--fx-ease), border-color .3s var(--fx-ease);
+}
+.fx-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 107, 53, .5);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, .14);
+}
+.fx-card .fx-icon {
+  font-size: 1.45rem;
+  display: inline-block;
+  margin-bottom: .45rem;
+}
+.fx-card h3 {
+  margin: 0 0 .3rem !important;
+  font-size: 1.02rem !important;
+  font-weight: 700 !important;
+  color: hsl(var(--card-foreground, 222.2 47.4% 11.2%));
+}
+.fx-card p {
+  margin: 0 !important;
+  font-size: .88rem;
+  line-height: 1.65;
+  color: hsl(var(--muted-foreground, 215.4 16.3% 46.9%));
+}
+.fx-card h3::after {
+  content: "";
+  display: block;
+  width: 2.2em;
+  height: 2px;
+  margin-top: .35rem;
+  border-radius: 2px;
+  background: var(--fx-grad);
+  transition: width .3s var(--fx-ease);
+}
+.fx-card:hover h3::after { width: 100%; }
+
+/* ---------- 正文标题渐变点缀 ---------- */
+.document h2::after {
+  content: "";
+  display: block;
+  width: 3.2em;
+  height: 3px;
+  margin-top: .4rem;
+  border-radius: 3px;
+  background: var(--fx-grad);
+  opacity: .9;
+}
+
+/* ---------- 表格 ---------- */
 table.docutils {
-    border-radius: 4px;
-    overflow: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid hsl(var(--border, 214.3 31.8% 91.4%));
 }
-
 table.docutils thead th {
-    background-color: var(--color-accent-emphasis);
-    color: white;
-    font-weight: 600;
+  background: linear-gradient(120deg, rgba(255, 107, 53, .92), rgba(255, 79, 109, .82));
+  color: #fff;
+  font-weight: 600;
 }
+table.docutils tbody tr { transition: background .2s ease; }
+table.docutils tbody tr:hover { background: rgba(255, 107, 53, .07); }
 
-/* Code block styling */
+/* ---------- 代码块 ---------- */
 div.highlight {
-    border-radius: 4px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid hsl(var(--border, 214.3 31.8% 91.4%));
+  box-shadow: 0 2px 10px rgba(15, 23, 42, .06);
+}
+div.highlight pre { margin: 0; }
+
+/* ---------- 行内代码 ---------- */
+code.literal {
+  background: rgba(255, 107, 53, .09);
+  border: 1px solid rgba(255, 107, 53, .2);
+  border-radius: 6px;
+  padding: .1em .4em;
+  color: hsl(var(--foreground, 222.2 47.4% 11.2%));
 }
 
-/* Image alignment */
-img.align-center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+/* ---------- 提示框 ---------- */
+.admonition {
+  border-radius: 12px !important;
+  border-left: 4px solid var(--fx-orange) !important;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, .05);
 }
+
+/* ---------- 侧栏 ---------- */
+.sidebar-tree .caption-text {
+  letter-spacing: .08em;
+  color: var(--fx-orange);
+}
+.sidebar-tree li.has-children > a:hover,
+.sidebar-tree a:hover { color: var(--fx-orange); }
+
+/* ---------- 滚动淡入（JS 加 .fx-ready 后启用） ---------- */
+body.fx-ready .fx-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .6s var(--fx-ease), transform .6s var(--fx-ease);
+}
+body.fx-ready .fx-reveal.fx-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  body.fx-ready .fx-reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- 滚动条 ---------- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(255, 107, 53, .45), rgba(255, 79, 109, .4));
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--fx-orange); border: 2px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* ---------- 选中文字 ---------- */
+::selection { background: rgba(255, 107, 53, .28); }
+
+/* ---------- Logo ---------- */
+.sidebar-logo { max-width: 80%; transition: transform .3s var(--fx-ease); }
+.sidebar-logo:hover { transform: scale(1.04) rotate(-1.2deg); }
+
+/* ---------- 图片 ---------- */
+img.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(15, 23, 42, .12);
+}
+
+/* ---------- 暗色（跟随主题 html.dark 切换） ---------- */
+html.dark .drifox-hero {
+  background:
+    radial-gradient(600px 240px at 12% -10%, rgba(255, 107, 53, .18), transparent 60%),
+    radial-gradient(500px 220px at 95% 0%, rgba(56, 189, 248, .13), transparent 60%),
+    radial-gradient(420px 200px at 60% 120%, rgba(255, 79, 109, .12), transparent 60%),
+    hsl(var(--muted, 210 40% 96.1%));
+  border-color: rgba(255, 107, 53, .3);
+}
+html.dark .fx-card:hover { box-shadow: 0 14px 34px rgba(0, 0, 0, .45); }
+html.dark .hero-badge.badge-dim { background: hsl(var(--background, 0 0% 100%)); }
+html.dark code.literal { background: rgba(255, 107, 53, .16); }
+html.dark div.highlight { box-shadow: none; }
+html.dark img.align-center { box-shadow: 0 6px 24px rgba(0, 0, 0, .45); }
