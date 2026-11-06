@@ -30,8 +30,11 @@ DriFox 支持通过 `Model Context Protocol (MCP) <https://modelcontextprotocol.
 
 - 配置好 MCP Server 后，工具自动出现在 AI 的可用工具列表中
 - MCP 工具名格式：``mcp__{server_name}__{tool_name}``
-- 连接/断开服务器无需重启，配置变更即时生效
-- 多窗口共享同一个 MCP 连接池
+- 连接/断开服务器无需重启，配置变更即时生效；多窗口共享同一个 MCP 连接池
+- **按需开启** （v0.6.11）：``mcp_manage`` 工具让模型可临时开启已关闭的服务器（如省 token 场景），用完 ``disable`` 关闭；临时开启的服务器工具经 ``tool_search`` 发现、``tool_execute`` 中转调用
+- **OAuth 授权** （v0.6.7）：支持 OAuth 授权流与 token 存储，授权可中止、状态可探测（v0.6.11）
+- **超时与稳定性** （v0.4.10）：per-server 超时配置、状态指示灯、连接队列化；stdio 命令安全校验（v0.4.13）
+- 服务器配置可放在插件内（``.mcp.json``），多插件自动合并去重；system-mcp 插件承载管理界面（v0.6.x 插件化）
 
 常用 MCP Server
 ===============

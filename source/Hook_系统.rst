@@ -48,3 +48,10 @@ Hook 可通过以下方式控制流程：
 - Exit code 2 → BLOCK（跳过工具执行）
 - JSON 输出 ``{"decision": "block"}`` → BLOCK
 - JSON 输出 ``{"decision": "continue"}`` → 继续
+
+配置管理与热重载
+================
+
+- **源文件写回** （v0.5.1）：界面修改直接写回 Hook 配置源文件，与手改 JSON 双向一致
+- **热重载** （v0.5.1）：Hook 配置变更即时生效，重载顺序与索引稳定，源标签不失效
+- **HookPolicy** （v0.5.4）：事件驱动插件管理引入 Hook 策略层；系统 Hook 策略由 system-hook-policies 插件承载（v0.6.x 插件化）

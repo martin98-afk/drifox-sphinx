@@ -1,26 +1,38 @@
 插件系统
 ########
 
-DriFox 的插件系统是其能力扩展的核心基石，将**命令、智能体、技能、主题、Hooks、MCP 配置、UI 组件**等所有扩展能力统一纳入插件化治理。
+DriFox 的插件系统是其能力扩展的核心基石，将 命令、智能体、技能、主题、Hooks、MCP 配置、UI 组件等所有扩展能力统一纳入插件化治理。
 
 架构总览
 ========
 
+自 v0.5.x 起工具系统、子智能体、上下文管理等核心能力陆续插件化，v0.6.x 插件形态已覆盖几乎全部系统功能：
+
 ::
 
     项目根目录/
-    ├── plugins/
-    │   └── system/              # 系统内置插件（打包在 exe 中）
-    │       ├── .drifox-plugin/  # 插件清单
-    │       ├── commands/        # 25+ 系统命令
-    │       ├── agents/          # 系统智能体
-    │       ├── skills/          # 25+ 系统技能
-    │       ├── themes/          # 21 套主题
-    │       ├── hooks/           # 系统 Hooks
-    │       └── .mcp.json        # 默认 MCP 配置
+    ├── plugins/                   # 内置插件（打包在 exe 中）
+    │   ├── system/                # 系统总插件（hooks/skills/ui/model_adapters 等）
+    │   ├── system-tools/          # 内置工具集（文件/终端/搜索/任务管理）
+    │   ├── system-subagent/       # 子智能体运行区与会话卡（v0.6.14 插件化）
+    │   ├── system-context/        # 上下文 tier cascade 与预算解析器
+    │   ├── system-timer/          # 定时/延迟任务调度
+    │   ├── system-mcp/            # MCP 服务器管理
+    │   ├── system-providers/      # 服务商与模型管理
+
+	│   ├── system-themes/           # 主题样式
+    │   ├── system-commands/       # 系统命令
+    │   ├── system-agents/         # 系统智能体定义
+    │   ├── system-skills/         # 系统技能
+    │   ├── worktree-manager/      # Git 工作树管理（v0.5.11）
+    │   ├── agent_trace/           # 智能体执行轨迹（v0.5.6）
+    │   ├── file-tree/             # 文件树与文件预览
+    │   ├── plugin-marketplace/    # 插件市场
+    │   └── ...                    # 其余内置插件
     │
     ├── .drifox/
-    │   └── plugins/             # 用户安装的第三方插件
+    │   ├── plugins/               # 用户安装的第三方插件
+    │   └── skills/                # 项目级技能源（v0.6.14）
 
 核心机制
 ========
@@ -32,15 +44,19 @@ DriFox 的插件系统是其能力扩展的核心基石，将**命令、智能�
    * - 机制
      - 说明
    * - 🧩 统一插件化
-     - 命令、Agent、Skill、主题、Hook、MCP、UI 全部以插件形式管理
-   * - 📦 双源发现
-     - 扫描 plugins/system（系统）和 .drifox/plugins（用户）
+     - 命令、Agent、Skill、主题、Hook、MCP、UI、工具、定时任务、服务商适配全部以插件形式管理（v0.5.2 工具插件化、v0.5.3 AutoLoop 插件化、v0.6.14 子智能体插件化）
+   * - 📦 多源发现
+     - 扫描 plugins/（内置）和 .drifox/plugins（用户）与 .drifox/skills（项目技能源）
    * - 🔖 清单驱动
-     - 每个插件含 .drifox-plugin/plugin.json 声明组件
+     - 每个插件含 .drifox-plugin/plugin.json 声明组件、``api_version`` 与 ``capabilities``
+   * - 🛡️ 能力声明契约
+     - 插件声明所需能力（如 ``team.send``、``mcp.call``），能力池加载期校验；宿主 ``api_version`` 门槛拦截不兼容插件（v0.6.10）
+   * - 🔌 贡献注册表
+     - 插件可动态贡献 skill_source / command / agent，禁用插件整组注销（v0.6.14）
    * - 🔄 热插拔
-     - 启用/禁用无需重启，rescan() 即时生效，增量重载
+     - 启用/禁用无需重启，rescan() 即时生效；组件级热重载，watcher 抑制宽限期防误触发（v0.6.15）
    * - 🏷️ 命名空间隔离
-     - 用户插件添加命名空间前缀，避免冲突
+     - 用户插件添加命名空间前缀，避免冲突；不可禁用核心插件保护（v0.5.8）
    * - 🧬 兼容 Claude
      - 兼容 .claude-plugin/plugin.json 格式
    * - ⚙️ MCP 配置合并
@@ -75,11 +91,22 @@ DriFox 的插件系统是其能力扩展的核心基石，将**命令、智能�
      - MCP 服务器配置
      - GitHub, Playwright
    * - ui/
-     - UI 组件（浮动卡片/渲染器/工厂）
+     - UI 组件（浮动卡片/渲染器/工厂/内嵌面板）
      - 上下文用量统计, 文件树
+   * - tools/
+     - 插件工具（注册进模型工具面）
+     - worktree-manager, mcp_manage（v0.5.2 插件化）
+   * - pages/
+     - 插件页面（工作台页签）
+     - 插件页面管理（v0.5.8）
+   * - settings/
+     - 独立设置卡（脱离大设置页单独注册，v0.6.14）
+     - LLMSettingsCard
 
-系统命令（v0.3.x 新增）
-=======================
+系统命令
+========
+
+系统命令现由 system-commands 等插件承载，命令可由任意插件贡献（v0.6.14 贡献注册表）。
 
 .. list-table::
    :header-rows: 1

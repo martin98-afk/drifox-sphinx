@@ -8,7 +8,7 @@
 project = 'DriFox'
 copyright = '2025~2026, Martin98-afk'
 author = 'Martin98-afk'
-release = '0.4.1'
+release = '0.6.15-beta'
 
 # -*- coding: utf-8 -*-
 
@@ -135,6 +135,7 @@ html_theme_options = {
 
 html_static_path = ['_static', '_images']
 html_css_files = ['custom.css']
+html_js_files = ['custom.js']
 
 html_sidebars = {
     '**': [

@@ -1,7 +1,7 @@
 整体介绍
 ########
 
-DriFox（飘狐）v0.4.1 — 基于 Python + PyQt5 开发的轻量化 AI 桌面对话助手。
+DriFox（飘狐）v0.6.15-beta — 基于 Python + PyQt5 开发的轻量化 AI 桌面对话助手。
 
 .. image:: /_images/软件介绍.png
    :alt: DriFox 软件概览
@@ -43,15 +43,15 @@ DriFox（飘狐）v0.4.1 — 基于 Python + PyQt5 开发的轻量化 AI 桌面�
    * - 🧠 CodeGraph 引擎
      - 语义化代码探索（5种模式）
    * - 🎨 动态主题系统
-     - 21 套主题，浅色/深色，组件级感知
+     - 18 套主题，浅色/深色，组件级感知，网格预览卡
    * - 🤖 多智能体并行
-     - 11 子智能体，DAG 工作流编排
+     - 内置 9 个 Agent（Primary/Subagent/Hidden），DAG 工作流编排，插件可扩展
    * - 🧩 插件系统
-     - 6 插件（含 50+ 子组件），命令/Agent/Skill/主题/Hook/MCP
+     - 30+ 内置插件，能力声明契约，命令/Agent/Skill/主题/Hook/MCP/工具/定时任务全插件化
    * - 🛠️ 40+ 内置工具
-     - 文件/执行/网络/代码/桌面/团队/MCP
+     - 文件/执行/网络/代码/记忆/团队/工作树/交接/插件市场/MCP
    * - 🔌 多模型
-     - OpenAI / Claude / DeepSeek / MiniMax / 通义 / 智谱AI / Google Gemini / Groq / SiliconFlow / 百度千帆 / 火山方舟 / Ollama / OpenCode
+     - OpenAI / Claude / DeepSeek / MiniMax / 通义 / 智谱AI / Google Gemini / Groq / SiliconFlow / 百度千帆 / 火山方舟 / Ollama / OpenCode / CodeBuddy（v0.6.0）
    * - 🌐 MCP 系统
      - Model Context Protocol，扩展工具能力
    * - 🔌 Hook 系统

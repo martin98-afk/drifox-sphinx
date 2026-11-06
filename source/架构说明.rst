@@ -1,12 +1,12 @@
 架构说明
 ########
 
-DriFox v0.4.1 采用四层架构设计，从上到下依次为 UI 层、渲染层、引擎层和存储层。
+DriFox v0.6.15 采用四层架构设计，从上到下依次为 UI 层、渲染层、引擎层和存储层；自 v0.5.x 起核心能力陆续下沉到插件层，v0.6.x 插件已成为能力的主要载体。
 
 ::
 
     ┌─────────────────────────────────────────────────────────────────┐
-    │                    DriFox v0.4.1 架构                          │
+    │                    DriFox v0.6.15 架构                         │
     ├─────────────────────────────────────────────────────────────────┤
     │  UI 层                                                          │
     │  ├── ToolPopupDialog – 浮动窗口容器（穿透/透明）                │
@@ -80,17 +80,20 @@ ECharts 交互式图表渲染、图片路径自动解析、Diff 差异对比（�
 核心业务逻辑层：
 
 - **ChatEngine** — 组装对话上下文，调用 LLM API
+- **ContextPipeline** — 上下文 tier cascade 与预算解析（v0.6.2，策略由 system-context 插件承载）
 - **ToolExecutor** — 执行 40+ 内置工具（共享线程池优化）
-- **PluginManager** — 插件发现、热插拔、配置合并（单例）
+- **PluginManager / PluginHostService** — 插件发现、热插拔、组件级热重载（v0.5.5）
+- **能力池（Capabilities）** — 插件声明式能力契约与加载期校验（v0.6.10）
+- **贡献注册表** — skill_source / command / agent 动态贡献（v0.6.14）
 - **UIPluginRegistry** — UI 组件注册表（单例，v0.3.0 新增）
-- **SubAgentManager** — 子智能体 DAG 编排与并行执行
-- **TeamManager** — 团队协作管理（v0.3.3 新增）
+- **SubAgentManager** — 子智能体 DAG 编排与并行执行（system-subagent 插件承载，v0.6.14）
+- **TeamManager** — 团队协作管理，多团队并存（v0.3.3 新增，v0.5.2 多团队）
 - **CodeGraph** — 代码智能引擎（v0.3.4 新增）
 - **HookManager** — 事件钩子生命周期管理
-- **Gateway** — 多平台消息网关（钉钉/Telegram/Discord/飞书/企业微信）
+- **GatewayService** — 多平台消息网关（应用级服务，v0.5.6 上移）
 - **UIEngine** — 主题管理、样式刷新、跨组件通信
-- **CronEngine** — 定时任务调度（v0.3.x 新增）
-- **AutoLoopEngine** — 自动循环执行引擎
+- **system-timer** — 定时/延迟任务调度（插件化）
+- **AutoLoopEngine** — 自动循环执行引擎（system-loop-policies 插件承载）
 
 存储层
 ============

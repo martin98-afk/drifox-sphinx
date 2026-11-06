@@ -37,3 +37,7 @@ $RECYCLE.BIN/
 
 # ── Sphinx 构建输出 ──
 _build/
+_buildenv/
+
+# ── DriFox 助手本地目录 ──
+.drifox/

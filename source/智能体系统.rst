@@ -8,7 +8,7 @@
 
 DriFox 采用 **Primary / Subagent / Hidden** 三层 Agent 设计，通过 Markdown + YAML frontmatter 定义。
 
-Agent 类型（共 11 个 Agent）
+Agent 类型（内置 9 个，插件可扩展）
 ========================================
 
 Primary Agent（3个）
@@ -45,10 +45,13 @@ Hidden Agent
 
 后台自动运行，无需用户感知：
 
-- ``summary`` — 信息总结
 - ``compaction`` — 上下文压缩
 - ``title`` — 会话标题生成
-- ``auto_loop`` — 自动循环模式
+
+.. note::
+
+   自 v0.6.14 起子智能体系统由 system-subagent 插件承载（运行区、会话卡、管理与团队工具）；
+   插件可通过贡献注册表动态新增 agent 定义，禁用插件时整组注销。
 
 Agent 定义示例
 ==============
@@ -71,6 +74,6 @@ Agent 定义示例
 
 v0.3.3 新增 **Leader 智能体**，负责统筹团队协作：
 
-- ``team_list_members`` — 列出团队中所有成员
-- ``team_send_message`` — 向指定 Agent 发送任务邮件（串行处理，自动回复）
+- ``team_manage`` — 团队统一管理入口（list / create / add / remove / leave）
+- ``team_send_message`` — 向指定 Agent 发送任务邮件（串行处理，自动开始）
 - ``/team`` 命令 — 团队模板的保存/加载/列表/删除
